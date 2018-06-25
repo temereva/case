@@ -6,10 +6,14 @@ addons:
 # Clean and don't fail
 install:
   - rm -rf public || exit 0
+
+
 # Build the website
 script:
-  - binaries/hugo --theme=hugo-nederburg-theme
-  # Deploy to GitHub pages
+  - binaries/hugo --theme=fresh
+
+
+# Deploy to GitHub pages
 deploy:
   provider: pages
   skip_cleanup: true
