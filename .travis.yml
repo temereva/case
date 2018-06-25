@@ -8,7 +8,7 @@ install:
   - rm -rf public || exit 0
 # Build the website
 script:
-  - binaries/hugo --hugo-nederburg-theme
+  - binaries/hugo --theme=hugo-nederburg-theme
   # Deploy to GitHub pages
 deploy:
   provider: pages
