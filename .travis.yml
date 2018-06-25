@@ -1,5 +1,20 @@
-language: ruby
-rvm:
- - 2.2
- - jruby
- - rbx-3
+language: python
+
+install:
+    - wget https://github.com/gohugoio/hugo/releases/download/v0.31.1/hugo_0.31.1_Linux-64bit.deb
+    - sudo dpkg -i hugo*.deb
+    - pip install Pygments
+
+script:
+    - hugo
+
+after_success: |
+    if [ -n "0ce3803511c598b2a31872c57809a3ec42ca28ff" ]; then
+    git checkout --orphan master
+    git rm -rf .
+    mv public/* .
+    rm -rf public hugo_*
+    git add -f --ignore-errors --all
+    git -c user.name='travis' -c user.email='travis' commit -m init
+    git push -f -q https://temereva:0ce3803511c598b2a31872c57809a3ec42ca28ff@github.com/$TRAVIS_REPO_SLUG master
+    fi
